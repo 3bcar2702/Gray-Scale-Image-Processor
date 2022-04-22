@@ -1,4 +1,4 @@
-// FCI – Programming 1 – 2022 - Assignment 3
+// FCI ï¿½ Programming 1 ï¿½ 2022 - Assignment 3
 // Program Name: Gray-Scale-Image-Processor
 // Last Modification Date: 22/04/2022
 // Author1 and ID and Group: Ahmed Hesham  20211008  s11
@@ -17,7 +17,7 @@
 using namespace std;
 unsigned char image[SIZE][SIZE];
 unsigned char image2[SIZE][SIZE];
-int filter9 = 0;
+char Numfilter;
 
 int loadImage ();
 void saveImage ();
@@ -49,134 +49,8 @@ int loadImage ()
     return readGSBMP(imageFileName, image);
 }
 
-void saveImage ()
-{
-    char imageFileName[100];
-
-    // Get gray scale image target file name
-    cout << "Enter the target image file name: ";
-    cin >> imageFileName;
-
-    // Add to it .bmp extension and load image
-    strcat(imageFileName, ".bmp");
-    if(filter9 == 1)
-        {
-   writeGSBMP(imageFileName, image2);
-        }
-else
-    {
-    writeGSBMP(imageFileName, image);
-    }
-}
-
-
-void Merge_Images()
-{
-char  image_name2[100];
-cout << "Enter the source image 2 file name: ";
-   cin >> image_name2;
-
-   strcat (image_name2, ".bmp");
-   readGSBMP(image_name2, image2);
-
-
-for (int i = 0; i < SIZE; i++) {
-    for (int j = 0; j< SIZE; j++){
-        image[i][j]=((image[i][j]+image2[i][j])/2);
-}
-}
-
-
-}
-
-
-
-
-void Darken_and_Lighten_Image ()
-{
-    int choose;
-    cout<<"Choose: "<<endl<<"1-Lighter "<<endl<<"2-Darker"<<endl;
-    cin>>choose;
-    if(choose==2){
-for (int i = 0; i < SIZE; i++) {
-    for (int j = 0; j< SIZE; j++){
-        if(image[i][j]/1.5>=0){
-        image[i][j]/=1.5;
-        }
-    else{
-        image[i][j]=0;
-    }
-    }
-    }
-}
-else{
-   for (int i = 0; i < SIZE; i++) {
-    for (int j = 0; j< SIZE; j++){
-        if(image[i][j]*1.5<=255){
-        image[i][j]*=1.5;
-        }
-    else{
-        image[i][j]=255;
-    }
-    }
-    }
-}
-}
-
-
-void Shrink_Image()
-{
-int choose;
-char  image_name2[100];
-
-
-cout << "Enter the source image 2 file name: ";
-   cin >> image_name2;
-
-
-   strcat (image_name2, ".bmp");
-   readGSBMP(image_name2, image2);
-cout<<"Enter shrinking rate: "<<endl<<"1-1/2"<<endl<<"2-1/3"<<endl<<"3-1/4"<<endl;
-cin>>choose;
-
-for(int i=0;i<SIZE;i++){
-        for(int j=0;j<SIZE;j++){
-            image2[i][j]=255;
-        }
-    }
-    for (int i = 0; i < SIZE; i++) {
-            for(int j=0;j<SIZE;j++){
-        image2[(i/(choose+1))][(j/(choose+1))]=image[i][j];
-    }
-
-
-}
-filter9 = 1;
-}
-
-
-
-
-
-void Blur_Image()
-{
-int avg=0;
-for (int i = 0; i < SIZE; i++) {
-    for (int j = 0; j< SIZE; j++){
-        avg = ((image[i+1][j]+image[i-1][j]+image[i][j+1]+image[i][j-1])/3);
-        image[i][j]=avg;
-    }
-}
-
-}
-
-
-
-
-
 void doSomethingForImage ()
 {
-    char Numfilter;
     cout<<"Please select a filter to apply or 0 to exit:\n"
           "1- Black & White Filter\n"
           "2- Invert Filter\n"
@@ -262,3 +136,137 @@ void doSomethingForImage ()
     }
 
 }
+
+
+void saveImage ()
+{
+    char imageFileName[100];
+
+    // Get gray scale image target file name
+    cout << "Enter the target image file name: ";
+    cin >> imageFileName;
+
+    // Add to it .bmp extension and load image
+    strcat(imageFileName, ".bmp");
+    switch(Numfilter)
+    {
+        case '9':
+            writeGSBMP(imageFileName, image2);
+            break;
+
+        default:
+            writeGSBMP(imageFileName, image);
+
+    }
+}
+
+
+
+void Merge_Images()
+{
+    charimage_name2[100];
+    cout << "Enter the source image 2 file name: ";
+    cin >> image_name2;
+
+    strcat (image_name2, ".bmp");
+    if (readGSBMP(image_name2, image2) == 0)
+    {
+        for (int i = 0; i < SIZE; i++) 
+        {
+            for (int j = 0; j< SIZE; j++)
+            {
+                image[i][j]=((image[i][j]+image2[i][j])/2);
+            }
+        }
+    }
+
+}
+
+
+
+
+void Darken_and_Lighten_Image ()
+{
+    char choose;
+    cout<<"Choose: "<<endl<<"(L)ighter "<<endl<<"(d)arker"<<endl;
+    cin>>choose;
+    switch(choose.lower())
+    {
+        case 'l':
+            for (int i = 0; i < SIZE; i++) 
+            {
+                for (int j = 0; j< SIZE; j++)
+                {
+                    if(image[i][j]*1.5<=255)
+                    {
+                        image[i][j]*=1.5;
+                    }
+                    else
+                    {
+                        image[i][j]=255;
+                    }
+            }
+            break;
+
+        case 'd':
+            for (int i = 0; i < SIZE; i++) 
+            {
+                for (int j = 0; j< SIZE; j++)
+                {
+                    if(image[i][j]/1.5>=0)
+                    {
+                        image[i][j]/=1.5;
+                    }
+                    else
+                    {
+                        image[i][j]=0;
+                    }
+                }
+            }
+
+}
+
+
+
+void Shrink_Image()
+{
+    int choose;
+    cout<<"Enter shrinking rate: "<<endl<<"1-1/2"<<endl<<"2-1/3"<<endl<<"3-1/4"<<endl;
+    cin>>choose;
+    for(int i=0;i<SIZE;i++)
+    {
+        for(int j=0;j<SIZE;j++)
+        {
+            blackimage[i][j]=255;
+        }
+    }
+
+    for (int i = 0; i < SIZE; i++) 
+    {
+        for(int j=0;j<SIZE;j++)
+        {
+            image2[(i/(choose+1))][(j/(choose+1))]=image[i][j];
+        }
+    }
+
+}
+
+
+void Blur_Image()
+{
+    int avg = 0 ;
+    for (int i = 0; i < SIZE; i++)
+     {
+        for (int j = 0; j< SIZE; j++)
+        {
+            avg = ((image[i+1][j]+image[i-1][j]+image[i][j+1]+image[i][j-1])/3);
+            image[i][j]=avg;
+        }
+    }
+
+}
+
+
+
+
+
