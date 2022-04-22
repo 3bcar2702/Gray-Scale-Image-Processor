@@ -1,3 +1,13 @@
+// FCI – Programming 1 – 2022 - Assignment 3
+// Program Name: photoshop
+// Last Modification Date: 22/04/2022
+// Author1 and ID and Group: Ahmed Hesham-20211008-s11
+// Author2 and ID and Group: Mahmoud Mohamed -20210375-s11
+// Author3 and ID and Group: Aiman Motea - 20210783
+// Teaching Assistant: Eng Afaf Abdulmonem
+
+
+
 #include <iostream>
 #include <fstream>
 #include <cstring>
