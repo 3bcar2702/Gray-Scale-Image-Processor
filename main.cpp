@@ -21,6 +21,12 @@ char Numfilter;
 
 int loadImage ();
 void saveImage ();
+void ShuffleImage();
+void InvertImage();
+
+void RotateImage();
+
+void EnlargeImage();
 void doSomethingForImage ();
 void Merge_Images  ();
 void Darken_and_Lighten_Image ();
@@ -76,7 +82,7 @@ void doSomethingForImage ()
 
         case '2':
             // Invert filter call
-
+            InvertImage();
             break;
 
         case '3':
@@ -90,6 +96,7 @@ void doSomethingForImage ()
 
         case '5':
             // Rotate filter call
+            RotateImage();
             break;
 
         case '6':
@@ -103,6 +110,8 @@ void doSomethingForImage ()
 
         case '8':
             // Enlarge filter call
+            EnlargeImage();
+
             break;
 
         case  '9':
@@ -150,7 +159,10 @@ void saveImage ()
     strcat(imageFileName, ".bmp");
     switch(Numfilter)
     {
+        case '5':
+        case '8':
         case '9':
+        case 'b':
             writeGSBMP(imageFileName, image2);
             break;
 
@@ -164,7 +176,7 @@ void saveImage ()
 
 void Merge_Images()
 {
-    charimage_name2[100];
+    char image_name2[100];
     cout << "Enter the source image 2 file name: ";
     cin >> image_name2;
 
@@ -183,51 +195,52 @@ void Merge_Images()
 }
 
 
-
-
 void Darken_and_Lighten_Image ()
 {
     char choose;
-    cout<<"Choose: "<<endl<<"(L)ighter "<<endl<<"(d)arker"<<endl;
-    cin>>choose;
-    switch(choose.lower())
+    cout << "Choose: " << endl << "(L)ighter " << endl << "(d)arker" << endl;
+    cin >> choose;
+    switch (tolower(choose) )
     {
         case 'l':
-            for (int i = 0; i < SIZE; i++) 
+            for (int i = 0; i < SIZE; i++)
             {
-                for (int j = 0; j< SIZE; j++)
+                for (int j = 0; j < SIZE; j++)
                 {
-                    if(image[i][j]*1.5<=255)
+                    if (image[i][j] * 1.5 <= 255)
                     {
-                        image[i][j]*=1.5;
+                        image[i][j] *= 1.5;
                     }
                     else
                     {
-                        image[i][j]=255;
-                    }
-            }
-            break;
-
-        case 'd':
-            for (int i = 0; i < SIZE; i++) 
-            {
-                for (int j = 0; j< SIZE; j++)
-                {
-                    if(image[i][j]/1.5>=0)
-                    {
-                        image[i][j]/=1.5;
-                    }
-                    else
-                    {
-                        image[i][j]=0;
+                        image[i][j] = 255;
                     }
                 }
             }
+            break;
 
+         case 'd':
+             for (int i = 0; i < SIZE; i++)
+             {
+                 for (int j = 0; j < SIZE; j++)
+                 {
+                     if (image[i][j] / 1.5 >= 0)
+                     {
+                         image[i][j] /= 1.5;
+                     }
+                     else
+                     {
+                         image[i][j] = 0;
+                     }
+                 }
+             }
+            break;
+
+
+
+
+    }
 }
-
-
-
 void Shrink_Image()
 {
     int choose;
@@ -237,7 +250,7 @@ void Shrink_Image()
     {
         for(int j=0;j<SIZE;j++)
         {
-            blackimage[i][j]=255;
+            image2[i][j]=255;
         }
     }
 
@@ -266,7 +279,181 @@ void Blur_Image()
 
 }
 
+void InvertImage()
+{
+    for (int i = 0; i <SIZE ; ++i)
+    {
+        for (int j = 0; j <SIZE; ++j)
+        {
+            image[i][j] -= 255;
+        }
+    }
+}
+
+void RotateImage()
+{
+    cout<<"Rotate (90), (180) , (270) or (360) degrees?"<<endl;
+    int rotateAngle;
+    cin>>rotateAngle;
+    switch (rotateAngle)
+    {
+        case 90:
+            for (int i = 0; i < SIZE; ++i)
+            {
+                for (int j = 0; j < SIZE; ++j)
+                    image2[j][i] = image[255 - i][j];
+            }
+            break;
+
+        case 180:
+            for (int i = 0; i < SIZE; ++i)
+            {
+                for (int j = 0; j < SIZE; ++j)
+                {
+                    image2[i][j] = image[255 - i][255 - j];
+                }
+            }
+            break;
+
+        case 270:
+            for (int i = 0; i < SIZE; ++i)
+            {
+                for (int j = 0; j < SIZE; ++j)
+                    image2[j][i] = image[i][255 - j];
+            }
+     }
+}
+void EnlargeImage()
+{
+    int numQuarter,istart,jstart ,iend,jend;
+    cout<<" Which quarter to enlarge 1, 2, 3 or 4?"<<endl;
+    cin>>numQuarter;
+    switch (numQuarter)
+    {
+        case 1:
+            istart = 0;
+            jstart = 0;
+            iend = 128;
+            jend = 128;
+            break;
+
+        case 3:
+            istart = 128;
+            jstart = 0;
+            iend = 256;
+            jend = 128;
+            break;
+
+        case 2:
+            istart = 0;
+            jstart = 128;
+            iend = 128;
+            jend = 256;
+            break;
+
+
+        case 4:
+            istart = 128;
+            jstart = 128;
+            iend = 256;
+            jend = 256;
+            break;
+    }
+    for (int i = istart ,posi=0 ; i <iend ; ++i,posi+=2)
+    {
+        for (int j = jstart, posj=0 ; j <jend; ++j,posj+=2)
+        {
+            image2[posi][posj] = image[i][j] ;
+            image2[posi][posj+1] = image[i][j] ;
+            image2[posi+1][posj] = image[i][j] ;
+            image2[posi+1][posj+1] = image[i][j] ;
+        }
+    }
+
+}
 
 
 
+void ShuffleImage()
+{
+    char suffleWay[4];
+    int istart,jstart ,iend,jend;
+    cout<<" New order of quarters ?"<<endl;
+    cin>>suffleWay;
+    for (int n = 0; n < 4 ; ++n)
+    {
+        int iquartar ;
+        int jquartar ;
+        switch (n+1)
+        {
+            case 1:
+                iquartar = 0;
+                jquartar = 0;
+                break;
+
+            case 2:
+                iquartar = 0;
+                jquartar = 128;
+                break;
+
+            case 3:
+                iquartar = 128;
+                jquartar = 0;
+                break;
+
+            case 4:
+                iquartar = 128;
+                jquartar = 128;
+                break;
+
+        }
+        switch (suffleWay[n])
+        {
+            case '1':
+                istart = 0;
+                jstart = 0;
+                iend = 128;
+                jend = 128;
+                break;
+
+            case '3':
+                istart = 128;
+                jstart = 0;
+                iend = 256;
+                jend = 128;
+                break;
+
+            case '2':
+                istart = 0;
+                jstart = 128;
+                iend = 128;
+                jend = 256;
+                break;
+
+
+            case '4':
+                istart = 128;
+                jstart = 128;
+                iend = 256;
+                jend = 256;
+
+                break;
+
+
+        }
+        for (int i = istart ,posi = iquartar ; i <iend ; ++i,posi++)
+        {
+            for (int j = jstart, posj = jquartar ; j <jend; ++j,posj++)
+            {
+                image2[posi][posj] = image[i][j] ;
+            }
+        }
+
+
+
+
+    }
+
+
+}
 
