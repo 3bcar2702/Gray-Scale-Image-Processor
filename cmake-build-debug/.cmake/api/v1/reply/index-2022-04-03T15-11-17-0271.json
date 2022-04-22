@@ -1,0 +1,204 @@
+{
+	"cmake" : 
+	{
+		"generator" : 
+		{
+			"multiConfig" : false,
+			"name" : "Ninja"
+		},
+		"paths" : 
+		{
+			"cmake" : "C:/Program Files/JetBrains/CLion 2021.3.3/bin/cmake/win/bin/cmake.exe",
+			"cpack" : "C:/Program Files/JetBrains/CLion 2021.3.3/bin/cmake/win/bin/cpack.exe",
+			"ctest" : "C:/Program Files/JetBrains/CLion 2021.3.3/bin/cmake/win/bin/ctest.exe",
+			"root" : "C:/Program Files/JetBrains/CLion 2021.3.3/bin/cmake/win/share/cmake-3.21"
+		},
+		"version" : 
+		{
+			"isDirty" : false,
+			"major" : 3,
+			"minor" : 21,
+			"patch" : 1,
+			"string" : "3.21.1",
+			"suffix" : ""
+		}
+	},
+	"objects" : 
+	[
+		{
+			"jsonFile" : "codemodel-v2-5860c5ad18ffaf51b110.json",
+			"kind" : "codemodel",
+			"version" : 
+			{
+				"major" : 2,
+				"minor" : 3
+			}
+		},
+		{
+			"jsonFile" : "cache-v2-c12c659df5a0d6388380.json",
+			"kind" : "cache",
+			"version" : 
+			{
+				"major" : 2,
+				"minor" : 0
+			}
+		},
+		{
+			"jsonFile" : "cmakeFiles-v1-00588df1bd10978f4b3d.json",
+			"kind" : "cmakeFiles",
+			"version" : 
+			{
+				"major" : 1,
+				"minor" : 0
+			}
+		},
+		{
+			"jsonFile" : "toolchains-v1-40a45361301b1337b711.json",
+			"kind" : "toolchains",
+			"version" : 
+			{
+				"major" : 1,
+				"minor" : 0
+			}
+		}
+	],
+	"reply" : 
+	{
+		"Makefile" : 
+		{
+			"error" : "unknown query file"
+		},
+		"README.md" : 
+		{
+			"error" : "unknown query file"
+		},
+		"bmplib.cpp" : 
+		{
+			"error" : "unknown query file"
+		},
+		"bmplib.h" : 
+		{
+			"error" : "unknown query file"
+		},
+		"bmplib.o" : 
+		{
+			"error" : "unknown query file"
+		},
+		"cache-v2" : 
+		{
+			"jsonFile" : "cache-v2-c12c659df5a0d6388380.json",
+			"kind" : "cache",
+			"version" : 
+			{
+				"major" : 2,
+				"minor" : 0
+			}
+		},
+		"cmakeFiles-v1" : 
+		{
+			"jsonFile" : "cmakeFiles-v1-00588df1bd10978f4b3d.json",
+			"kind" : "cmakeFiles",
+			"version" : 
+			{
+				"major" : 1,
+				"minor" : 0
+			}
+		},
+		"codemodel-v2" : 
+		{
+			"jsonFile" : "codemodel-v2-5860c5ad18ffaf51b110.json",
+			"kind" : "codemodel",
+			"version" : 
+			{
+				"major" : 2,
+				"minor" : 3
+			}
+		},
+		"main.cpp.obj" : 
+		{
+			"error" : "unknown query file"
+		},
+		"ocr1.bmp" : 
+		{
+			"error" : "unknown query file"
+		},
+		"ocr2.bmp" : 
+		{
+			"error" : "unknown query file"
+		},
+		"ocr3.bmp" : 
+		{
+			"error" : "unknown query file"
+		},
+		"ocr4.bmp" : 
+		{
+			"error" : "unknown query file"
+		},
+		"ocr5.bmp" : 
+		{
+			"error" : "unknown query file"
+		},
+		"ocr7.bmp" : 
+		{
+			"error" : "unknown query file"
+		},
+		"ocr8.bmp" : 
+		{
+			"error" : "unknown query file"
+		},
+		"out.raw" : 
+		{
+			"error" : "unknown query file"
+		},
+		"out1.raw" : 
+		{
+			"error" : "unknown query file"
+		},
+		"out2.raw" : 
+		{
+			"error" : "unknown query file"
+		},
+		"out3.raw" : 
+		{
+			"error" : "unknown query file"
+		},
+		"point.cpp" : 
+		{
+			"error" : "unknown query file"
+		},
+		"point.h" : 
+		{
+			"error" : "unknown query file"
+		},
+		"test_bbox" : 
+		{
+			"error" : "unknown query file"
+		},
+		"test_bbox.cpp" : 
+		{
+			"error" : "unknown query file"
+		},
+		"test_ocr" : 
+		{
+			"error" : "unknown query file"
+		},
+		"test_ocr.cpp" : 
+		{
+			"error" : "unknown query file"
+		},
+		"test_ocr.o" : 
+		{
+			"error" : "unknown query file"
+		},
+		"toolchains-v1" : 
+		{
+			"jsonFile" : "toolchains-v1-40a45361301b1337b711.json",
+			"kind" : "toolchains",
+			"version" : 
+			{
+				"major" : 1,
+				"minor" : 0
+			}
+		}
+	}
+}
