@@ -23,15 +23,17 @@ int loadImage ();
 void saveImage ();
 void ShuffleImage();
 void InvertImage();
-
+void black_and_white();
 void RotateImage();
-
+void FlipImage();
 void EnlargeImage();
 void doSomethingForImage ();
 void Merge_Images  ();
 void Darken_and_Lighten_Image ();
 void Shrink_Image ();
 void Blur_Image ();
+void detect_edges();
+void Miror_filter();
 
 int main()
 {
@@ -78,6 +80,7 @@ void doSomethingForImage ()
     {
         case '1':
             // Black and White filter call
+			black_and_white();
             break;
 
         case '2':
@@ -92,6 +95,8 @@ void doSomethingForImage ()
 
         case '4':
             // Flip filter call
+			FlipImage();
+
             break;
 
         case '5':
@@ -106,6 +111,7 @@ void doSomethingForImage ()
 
         case '7':
             // Detect Edges filter call
+			void detect_edges();
             break;
 
         case '8':
@@ -120,6 +126,7 @@ void doSomethingForImage ()
 
         case 'a':
             // Miror filter call
+			Miror_filter();
             break;
 
         case 'b':
@@ -453,7 +460,102 @@ void ShuffleImage()
 
 
     }
-
-
 }
+void black_and_white(){
+for (int i = 0; i < SIZE; i++) {
+	for (int j = 0; j < SIZE; j++) {
+		if (image[i][j] > 127)
+			image[i][j] = 255;
+		else
+			image[i][j] = 0;
+	}
+} }
+void FlipImage() {
+	int n;
+	cout << "1 for down flip" << endl << "2 for side flip";
+	cin >> n;
+	switch (n)
+	{
+	case 1: {
+		unsigned char image2[SIZE][SIZE];
+		for (int i = 0; i < SIZE; i++) {
+			for (int j = 0; j < SIZE; j++) {
+				image2[i][j] = image[255 - i][j];
+			}
+		}
+		break;
+
+	}
+	case 2: {
+		for (int i = 0; i < SIZE; i++) {
+			for (int j = 0; j < SIZE; j++) {
+				image2[i][j] = image[i][255 - j];
+			}
+		}
+		for (int i = 0; i < SIZE; i++) {
+			for (int j = 0; j < SIZE; j++) {
+				image[i][j] = image2[i][j];
+			}
+		}
+	}
+	}
+	void detect_edges() {
+		for (int i = 0; i < SIZE; i++) {
+			for (int j = 0; j < SIZE; j++) {
+				image2[i][j] = 255;
+				if (image[i][j] > 128 && image[i + 1][j] < 128)
+					image2[i][j] = 0;
+				if (image[i][j] < 128 && image[i + 1][j]>128)
+					image2[i][j] = 0;
+				if (image[i][j] > 128 && image[i][j + 1] < 128)
+					image2[i][j] = 0;
+				if (image[i][j] < 128 && image[i][j + 1]>128)
+					image2[i][j] = 0;
+			}
+		}
+	}
+	void Miror_filter() {
+		int n;
+		cout << "1-Left 1/2 " << endl << "2-Right 1/2 " << endl << "3-Upper 1/2 " << endl << "4-Lower 1/2" << endl << "choose ya hapipyyy " << endl;
+		cin >> n;
+		switch (n)
+		{	
+		case 1:
+			for (int i = 0; i < SIZE; i++) {
+			for (int j = 0; j < SIZE; j++) {
+				image[i][j] = image[255 - i][j];
+
+			}
+		}
+			break;
+		case 2:
+			for (int i = 0; i < SIZE; i++) {
+				for (int j = 0; j < SIZE; j++) {
+					image[i][j] = image[i][255 - j];
+
+				}
+			}
+			break;
+		}
+	case 3:
+		for (int i = SIZE; i >= 0; i--) {
+			for (int j = SIZE; j >= 0; j--) {
+				image[i][j] = image[255 - i][j];
+
+			}
+		}
+		break;
+	case 4:
+		for (int i = SIZE; i >= 0; i--) {
+			for (int j = SIZE; j >= 0; j--) {
+				image[i][j] = image[i][255 - j];
+
+			}
+		}
+	
+	
+	
+	
+	}
+
 
